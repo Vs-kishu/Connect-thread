@@ -1,9 +1,12 @@
 
 const RightSideBar = () => {
   return (
-    <div>
-      right bar
-    </div>
+    <section className="custom-scrollbar rightsidebar">
+      <div className="flex flex-1 flex-col justify-start">
+        <h3>suggested commuties</h3>
+
+      </div>
+    </section>
   )
 }
 
