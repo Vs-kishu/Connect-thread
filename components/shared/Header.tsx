@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { SignInButton,SignOutButton} from '@clerk/nextjs'
 import { OrganizationSwitcher } from "@clerk/nextjs";
+import {dark} from '@clerk/themes'
 function Header () {
   return (
     <nav className="topbar">
@@ -21,6 +22,7 @@ function Header () {
       </div>
     <OrganizationSwitcher
       appearance={{
+        baseTheme: dark,
   elements:{
     oraganizationSwitcherTrigger:"px-4 py-2"
   }
