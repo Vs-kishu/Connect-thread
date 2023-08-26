@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/form"
 import * as z from 'zod'
 import { Input } from '@/components/ui/input'
-import { usePathname, useRouter } from 'next/navigation'
-import { updateUser } from '@/lib/actions/user.actions'
+import { usePathname } from 'next/navigation'
 import { CommentsValidation } from '@/lib/validations/thread'
 import Image from 'next/image'
 import { addCommentToThread } from '@/lib/actions/thread.actions'
@@ -26,7 +25,6 @@ interface props{
 }
 const Comment = ({threadId,currentUserImg,currentUserId}:props) => {
 
-        const router=useRouter()
     const pathname=usePathname()
 
     const form = useForm({
