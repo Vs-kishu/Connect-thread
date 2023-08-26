@@ -4,8 +4,9 @@ import Link from 'next/link'
 import Image from'next/image'
 
 import {usePathname,useRouter} from 'next/navigation'
-import { SignInButton,SignOutButton } from '@clerk/nextjs'
+import { SignInButton,SignOutButton,useAuth } from '@clerk/nextjs'
 const LeftSideBar = () => {
+  const {userId}=useAuth()
   const router=useRouter();
   const pathName=usePathname();
   return (
@@ -13,6 +14,8 @@ const LeftSideBar = () => {
 <div className="flex w-full flex-1 flex-col gap-6 px-6">
   {sidebarLinks.map((link)=> {
   const isActive=(pathName.includes(link.route))&& link.route.length >1 ||pathName=== link.route
+  if(link.route === '/profile')  link.route = `${link.route}/${userId}`
+  
   return(
     <Link href={link.route} key={link.label} className={ `leftsidebar_link ${isActive && 'bg-primary-500'}`}>
       <Image 

@@ -65,7 +65,7 @@ const PostThread = ({userId}:Props) => {
             </FormItem>
           )}
         />
-<Button type='submit' className='bg-primary-500'>Submit</Button>
+        <Button type='submit' className='bg-primary-500'>Post Thread</Button>
         </form>
         </Form>
   )

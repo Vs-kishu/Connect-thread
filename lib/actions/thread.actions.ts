@@ -32,13 +32,18 @@ export async function createThread({text,author,communityId,path}:Params){
 export async function fetchPosts(pageNumber=1,pageSize=20){
     connectToDB()
     //calculate no of posts
-   const skipAmount=(pageNumber-1)*pageSize
+   const skipAmount=(pageNumber-1) * pageSize
 //fetch the thread that hve no parents(top-level threads)
     const postsQuery=Thread.find({parentId:{$in:[null,undefined]}})
         .sort({createdAt:'desc'})
         .skip(skipAmount)
         .limit(pageSize)
-        .populate({path:'author',model:User})//creater
+        .populate(
+            {
+            path:'author',
+            model:User
+            }
+            )//creater
         .populate({   //comments user
         path:'children',
         populate:{

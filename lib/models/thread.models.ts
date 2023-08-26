@@ -11,7 +11,7 @@ community:{
     type : mongoose.Schema.Types.ObjectId ,
     ref:'Community',
 },
-crreatedAt:{
+createdAt:{
     type:Date,
     default:Date.now()
 },

@@ -3,7 +3,7 @@ import Comment from "@/components/forms/Comment"
 import { fetchThreadById } from "@/lib/actions/thread.actions"
 import { fetchUser } from "@/lib/actions/user.actions"
 import { currentUser } from "@clerk/nextjs"
-import { redirect } from "next/dist/server/api-utils"
+import { redirect } from "next/navigation"
 
 const Page = async({params}:{params:{id:string}})=>{
     const user= await currentUser()
@@ -11,10 +11,7 @@ const Page = async({params}:{params:{id:string}})=>{
     if(!user) return null
 
     const userInfo = await fetchUser(user.id)
-    if(!userInfo?.onboarded) {
-        redirect('/onboarding')
-        return
-    }
+    if(!userInfo?.onboarded) redirect('/onboarding')
 
     const thread= await fetchThreadById(params.id)
 
@@ -22,7 +19,6 @@ const Page = async({params}:{params:{id:string}})=>{
   <section className="relative">
         <div>
               <ThreadCard
-               key={thread._id}
                id={thread._id}
                curentUserId={user?.id || ""}
                parentId={thread.parentId}
@@ -40,7 +36,7 @@ const Page = async({params}:{params:{id:string}})=>{
                currentUserImg={userInfo.image}
                />
         </div>
-        <div className="mt-10">
+        <div className="mt-10 ">
         {thread.children.map((childItem:any)=>
          <ThreadCard
                key={childItem._id}
