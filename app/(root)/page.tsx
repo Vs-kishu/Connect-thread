@@ -25,8 +25,6 @@ export default async function Home() {
     createdAt={post.createdAt}
     comments={post.children}
     commmunity={post.community}
-
-
     />
 
     ))}

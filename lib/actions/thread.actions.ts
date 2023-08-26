@@ -53,3 +53,40 @@ const posts=await postsQuery.exec()
 const isNext=totalPostsCount > skipAmount +posts.length
 return {posts,isNext}
 }
+
+
+export async function fetchThreadById(id:string){
+    connectToDB()
+
+    try {
+        const thread =await Thread.findById(id).populate({
+            path:'author',
+            model: User,
+            select:'_id name parentId image'
+        })
+        .populate({
+            path:'children',
+            populate:[
+                {
+                    path:'authore',
+                    model:User,
+                    select:'_id name parentId image'
+                },
+                {
+                    path:'children',
+                    model: Thread,
+                    populate:{
+                          path:'authore',
+                          model:User,
+                          select:'_id name parentId image'
+                    }
+
+                }
+            ]
+        }).exec()
+        return thread
+    } catch (error:any) {
+        throw new Error(`Error in fetching thread ${error.message}`)
+    }
+
+}
